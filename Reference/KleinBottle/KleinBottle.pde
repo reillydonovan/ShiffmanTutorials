@@ -1,7 +1,6 @@
 import peasy.*;
 
 PeasyCam cam;
-int N = 50;
 float umin = -1 * PI;
 float umax = PI;
 float vmin = -1 * PI;
@@ -10,7 +9,7 @@ float vmax = PI;
 float a = 1;
 float u;
 float v;
-float r = 10;
+float r = 50;
 
 PVector[][] globe;
 int total = 50;
@@ -18,20 +17,21 @@ int total = 50;
 void setup() {
   size(600, 600, P3D);
   globe = new PVector[total+1][total+1];
-  cam = new PeasyCam(this, 100);
+  cam = new PeasyCam(this, 300);
 }
 
 void draw() {
   background(0);
-noFill();
-lights();
-stroke(255);
-  float r = 200;
+  noFill();
+  lights();
+  stroke(255);
   for (int i = 0; i < total + 1; i++) {
+
     for (int j = 0; j < total + 1; j++) {
-      u = umin + i * (umax - umin) / N;
-      v = vmin + j * (vmax - vmin) / N;
-      
+    //  if (i % 5 == 0) fill (0, 255, 0);
+      u = umin + i * (umax - umin) / total;
+      v = vmin + j * (vmax - vmin) / total;
+
       float x = r * cos(u) * (a + sin(v) * cos(u/2) - sin(2 * v) * sin(u/2)/2);
       float y = r * sin(u) * (a + sin(v) * cos(u/2) - sin(2 * v) * sin(u/2)/2);
       float z = r * sin(u/2) * sin(v) + cos(u/2) * sin(2 * v)/2;
