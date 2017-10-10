@@ -2,13 +2,15 @@ import peasy.*;
 
 PeasyCam cam;
 float umin = -1 * PI;
-float umax = PI;
+float umax = PI * 4;
 float vmin = -1 * PI;
-float vmax = PI;
+float vmax = PI * 2;
 
-float a = 0;
+float a = 1.5;
 float u = 2;
 float v;
+float m = 1;
+float n = 2;
 float r = 50;
 
 PVector[][] globe;
@@ -27,13 +29,13 @@ void draw() {
   stroke(255);
   for (int i = 0; i < total + 1; i++) {
     for (int j = 0; j < total + 1; j++) {
-      if (i % 5 == 0) fill (0, 255, 0);
+   //   if (i % 5 == 0) fill (0, 255, 0);
       u = umin + i * (umax - umin) / total;
       v = vmin + j * (vmax - vmin) / total;
 
-      float x = r * cos(u) * (a + sin(v) * cos(u/2) - sin(2 * v) * sin(u/2)/2);
-      float y = r * sin(u) * (a + sin(v) * cos(u/2) - sin(2 * v) * sin(u/2)/2);
-      float z = r * sin(u/2) * sin(v) + cos(u/2) * sin(2 * v)/2;
+      float x = r *  (a + cos(n*u/2.0) * sin(v) - sin(n*u/2.0) * sin(2*v)) * cos(m*u/2.0);
+      float y = r * (a + cos(n*u/2.0) * sin(v) - sin(n*u/2.0) * sin(2*v)) * sin(m*u/2.0);
+      float z = r * sin(n*u/2.0) * sin(v) + cos(n*u/2.0) * sin(2*v);
       globe[i][j] = new PVector(x, y, z);
     }
   }
